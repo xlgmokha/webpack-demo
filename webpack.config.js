@@ -1,16 +1,24 @@
+const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const parts = require('./webpack.parts');
+const commonConfig = merge([
+  {
+    plugins: [
+      new HtmlWebpackPlugin({
+        title: 'Webpack demo',
+      }),
+    ],
+  },
+]);
+const productionConfig = merge([]);
+const developmentConfig = merge([
+  host: process.env.HOST,
+  port: process.env.PORT,
+]);
 
 module.exports = {
-  devServer: {
-    host: process.env.HOST,
-    open: true,
-    overlay: true,
-    port: process.env.PORT,
-    stats: "errors-only",
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: 'Webpack demo',
-    }),
-  ]
+  if (mode === "production") {
+    return merge(commonConfig, productionConfig, { mode });
+  }
+  return merge(commonConfig, developmentConfig, { mode });
 };
