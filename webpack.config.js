@@ -9,14 +9,17 @@ const commonConfig = merge([
       }),
     ],
   },
+  parts.loadCSS(),
 ]);
 const productionConfig = merge([]);
 const developmentConfig = merge([
-  host: process.env.HOST,
-  port: process.env.PORT,
+  parts.devServer({
+    host: process.env.HOST,
+    port: process.env.PORT,
+  }),
 ]);
 
-module.exports = {
+module.exports = mode => {
   if (mode === "production") {
     return merge(commonConfig, productionConfig, { mode });
   }
