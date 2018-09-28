@@ -42,6 +42,7 @@ const developmentConfig = merge([
 ]);
 
 module.exports = mode => {
+  process.env.BABEL_ENV = mode;
   if (mode === "production") {
     return merge(commonConfig, productionConfig, { mode });
   }
