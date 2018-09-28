@@ -19,6 +19,7 @@ const commonConfig = merge([
   parts.loadJavaScript({ include: PATHS.app }),
 ]);
 const productionConfig = merge([
+  parts.generateSourceMaps({ type: 'source-map' }),
   parts.extractCSS({
     use: ["css-loader", parts.autoprefix()]
   }),
