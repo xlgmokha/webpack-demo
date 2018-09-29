@@ -61,7 +61,10 @@ const productionConfig = merge([
             chunks: "initial",
           }
         }
-      }
+      },
+      runtimeChunk: {
+        name: "manifest",
+      },
     }
   },
   parts.attachRevision(),
