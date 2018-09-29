@@ -1,6 +1,8 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const PurifyCSSPlugin = require('purifycss-webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const webpack = require('webpack');
+const GitRevisionPlugin = require('git-revision-webpack-plugin');
 
 exports.extractCSS = ({ include, exclude, use = [] }) => {
   const plugin = new MiniCssExtractPlugin({
@@ -97,4 +99,12 @@ exports.generateSourceMaps = ({ type }) => ({
 
 exports.clean = path => ({
   plugins: [new CleanWebpackPlugin([path])],
+});
+
+exports.attachRevision = () => ({
+  plugins: [
+    new webpack.BannerPlugin({
+      banner: new GitRevisionPlugin().version(),
+    }),
+  ]
 });

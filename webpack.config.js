@@ -19,6 +19,7 @@ const commonConfig = merge([
   },
   parts.loadJavaScript({ include: PATHS.app }),
 ]);
+
 const productionConfig = merge([
   parts.clean(PATHS.build),
   parts.generateSourceMaps({ type: 'source-map' }),
@@ -47,7 +48,9 @@ const productionConfig = merge([
       }
     }
   },
+  parts.attachRevision(),
 ]);
+
 const developmentConfig = merge([
   parts.devServer({
     host: process.env.HOST,
