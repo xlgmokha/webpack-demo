@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build:stats": "webpack --env production --json > stats.json",
     "build": "webpack --env production",
     "start": "webpack-dev-server --env development",
     "test": "echo \"Error: no test specified\" && exit 1"
