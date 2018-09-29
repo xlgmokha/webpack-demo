@@ -8,7 +8,7 @@ function server(port) {
 
   app.use(express.static("static"));
   app.get("/", (req, res) => res.status(200).send(renderMarkup(renderToString(SSR))));
-  app.listen(port);
+  app.listen(port, () => process.send && process.send("online"));
 }
 
 function renderMarkup(html) {
@@ -20,7 +20,7 @@ function renderMarkup(html) {
   </head>
   <body>
     <div id="app">${html}</div>
-    <script src="./index.js"></script>
+    <script src="${process.env.BROWSER_REFRESH_URL}"></script>
   </body>
 </html>`;
 }
