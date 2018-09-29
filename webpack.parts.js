@@ -6,6 +6,7 @@ const GitRevisionPlugin = require('git-revision-webpack-plugin');
 const UglifyWebpackPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const cssnano = require('cssnano');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 exports.extractCSS = ({ include, exclude, use = [] }) => {
   const plugin = new MiniCssExtractPlugin({
@@ -83,17 +84,17 @@ exports.loadImages = ({ include, exclude, options } = {}) => ({
 
 exports.loadJavaScript = ({ include, exclude } = {}) => (
   {
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        include,
-        exclude,
-        use: "babel-loader",
-      },
-    ],
-  },
-}
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          include,
+          exclude,
+          use: "babel-loader",
+        },
+      ],
+    },
+  }
 );
 
 exports.generateSourceMaps = ({ type }) => ({
@@ -136,3 +137,23 @@ exports.setFreeVariable = (key, value) => {
     plugins: [new webpack.DefinePlugin(env)],
   };
 };
+
+exports.page = ({
+  path = "",
+  template = require.resolve(
+    "html-webpack-plugin/default_index.ejs"
+  ),
+  title,
+  entry,
+  chunks,
+} = {}) => ({
+  entry,
+  plugins: [
+    new HtmlWebpackPlugin({
+      chunks,
+      filename: `${path && path + "/"}index.html`,
+      template,
+      title,
+    }),
+  ],
+});
