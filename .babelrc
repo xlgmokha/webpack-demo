@@ -2,10 +2,16 @@
   "plugins": ["syntax-dynamic-import"],
   "presets": [
     [
+      "@babel/preset-react",
+      {
+        "modules": false,
+      }
+    ],
+    [
       "@babel/preset-env",
       {
         "modules": false,
       }
-    ]
+    ],
   ]
 }
