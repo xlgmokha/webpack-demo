@@ -1,4 +1,6 @@
-node_modules
-dist
-stats.json
 build
+coverage
+dist
+i18n-build
+node_modules
+stats.json
