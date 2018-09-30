@@ -13,5 +13,15 @@
         "modules": false,
       }
     ],
-  ]
+  ],
+  "env": {
+    "karma": {
+      "plugins": [
+        [
+          "istanbul",
+          { "exclude": ["tests/*.test.js"] }
+        ]
+      ],
+    },
+  }
 }
