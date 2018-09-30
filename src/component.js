@@ -1,4 +1,5 @@
 import Worker from "worker-loader!./worker";
+import "!demo-loader?name=foo!./main.css";
 
 export default () => {
   const element = document.createElement("h1");

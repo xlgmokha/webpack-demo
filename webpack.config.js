@@ -13,6 +13,11 @@ const commonConfig = merge([
     output: {
       publicPath: "/",
     },
+    resolveLoader: {
+      alias: {
+        "demo-loader": path.resolve(__dirname, "loaders/demo-loader.js"),
+      },
+    },
   },
   parts.loadJavaScript({ include: PATHS.app }),
   parts.setFreeVariable("HELLO", "hello from config"),
